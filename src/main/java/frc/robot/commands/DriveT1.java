@@ -95,7 +95,7 @@ public class DriveT1 extends CommandBase {
       Robot.drivetrain.simpleDrive(0, 0);
       dt.stopTestDurationTimer();
       //System.out.println("FPGA Time: " + getFPGATimestamp());
-      System.out.println("Tottal test Duration: " + dt.getTestDurationTimer());
+      System.out.println("Total test Duration: " + dt.getTestDurationTimer());
       return true;
     }
     else {
