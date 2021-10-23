@@ -8,9 +8,13 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 //import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import java.util.logging.Logger;
 
 /** An example command that uses an example subsystem. */
 public class DriveT1 extends CommandBase {
+  
+  private static final Logger customLogger = Logger.getLogger(DriveT1.class.getName());
+
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain dt;
 
@@ -31,6 +35,7 @@ public class DriveT1 extends CommandBase {
     dt.zeroLocalTimer();
     dt.startLocalTimer();
     dt.startTestDurationTimer();
+    customLogger.info("initialize complete");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -74,10 +79,12 @@ public class DriveT1 extends CommandBase {
       left = 0.0; right = 0.0;
     }
     else if(dt.getLocalTimer() >= endCycleTime) {
+      customLogger.info("Reseting Cycle");
       left = 0.0; right = 0.0;
       dt.zeroLocalTimer();
     }
     else {
+      customLogger.warning("Somethings wrong...");
       left = 0.0; right =0.0;
     }
 
@@ -95,7 +102,8 @@ public class DriveT1 extends CommandBase {
       Robot.drivetrain.simpleDrive(0, 0);
       dt.stopTestDurationTimer();
       //System.out.println("FPGA Time: " + getFPGATimestamp());
-      System.out.println("Total test Duration: " + dt.getTestDurationTimer());
+      //System.out.println("Total test Duration: " + dt.getTestDurationTimer());
+      customLogger.info("Total test Duration: " + dt.getTestDurationTimer());
       return true;
     }
     else {
